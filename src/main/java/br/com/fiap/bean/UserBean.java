@@ -3,7 +3,7 @@ package br.com.fiap.bean;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 

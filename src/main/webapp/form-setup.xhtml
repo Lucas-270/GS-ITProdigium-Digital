@@ -18,6 +18,7 @@
 					<p:outputLabel value="Name" for="name" />
 					<p:inputText id="name" value="#{setupBean.setup.name}"
 						required="true" >
+						<f:ajax event="blur" render="messages"></f:ajax>
 					</p:inputText>
 
 					<p:outputLabel value="Description" for="description" />
@@ -25,11 +26,13 @@
 						value="#{setupBean.setup.description}"
 						validatorMessage="Description: Tamanho do campo deve estar entre 50 e 255">
 						<f:validateLength maximum="255" minimum="50" />
+						<f:ajax event="blur" render="messages"></f:ajax>
 					</p:inputTextarea>
 
 					<p:outputLabel value="Price" for="price" />
 					<p:inputText id="price" value="#{setupBean.setup.price}">
 						<f:validateDoubleRange minimum="1" />
+						<f:ajax event="blur" render="messages"></f:ajax>
 					</p:inputText>
 
 				</h:panelGrid>
@@ -37,6 +40,7 @@
 				<f:facet name="footer">
 					<p:commandButton icon="pi pi-check" value="Save"
 						action="${setupBean.save}" >
+						<f:ajax execute="@form" render="form-setups"/>
 					</p:commandButton>
 					<p:commandButton icon="pi pi-times" value="Cancel"
 						styleClass="ui-button-secondary" style="margin-left: .5em" />
