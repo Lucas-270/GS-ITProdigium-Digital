@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+</head>
+
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="content">
+		<p:messages id="messages"><p:autoUpdate /></p:messages>
+		<h:form>
+			<p:card class="card-form">
+				<f:facet name="title">New User</f:facet>
+
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Name" for="name" />
+					<p:inputText id="name" value="#{userBean.user.name}" 
+						required="true">
+						<f:ajax event="blur" render="messages" />
+					</p:inputText>
+
+					<p:outputLabel value="dateOfBirth" for="dateofbirth" />
+					<p:calendar id="dateofbirth" value="#{userBean.user.dateOfBirth}" 
+						pattern="dd/MM/yyyy" validatorMessage="dateOfBirth: Informe uma data válida no formato 'dia/mês/ano'">
+						<f:ajax event="blur" render="messages"></f:ajax>
+					</p:calendar>
+
+					<p:outputLabel value="Email" for="email" />
+					<p:inputText id="email" value="#{userBean.user.email}" validatorMessage="Email: informe um email válido">
+						<f:validateRegex pattern="/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i"></f:validateRegex>
+						<f:ajax event="blur" render="messages" />
+					</p:inputText>
+					
+					<p:outputLabel value="Password" for="password" />
+					<p:inputText id="password" value="#{userBean.user.password}" required="true"
+					validatorMessage="Password: Deve conter uma letra maiúscula e uma minúscula e ter mais de 6 caracteres">
+						<f:validateRegex pattern="((? = .*[A-z]).{6,})" />
+						<f:ajax event="blur" render="messages" />
+					</p:inputText>
+					
+				</h:panelGrid>
+
+				<f:facet name="footer">
+					<p:commandButton icon="pi pi-check" value="Save" 
+					action="${userBean.save}" >
+						<f:ajax execute="@form" render="form-users"/>
+					</p:commandButton>
+					<p:commandButton icon="pi pi-times" value="Cancel"
+						styleClass="ui-button-secondary" style="margin-left: .5em" />
+				</f:facet>
+			</p:card>
+		</h:form>
+		<div class="card">
+			<h:form id="form-users">
+				<p:dataTable 
+					id="users" 
+					var="user"
+					value="#{userBean.users}" 
+					rowKey="#{user.id}"
+					selectionMode="single">
+
+					<f:facet name="header">
+                		Users List
+            		</f:facet>
+            		
+					<p:column headerText="Name">
+						<h:outputText value="#{user.name}" />
+					</p:column>
+					<p:column headerText="DateOfBirth">
+						<h:outputText value="#{user.dateOfBirth}" />
+					</p:column>
+					<p:column headerText="Email">
+						<h:outputText value="#{user.email}" />
+					</p:column>
+				</p:dataTable>
+
+				<p:contextMenu for="users">
+					<p:menuitem value="Delete" update="users" icon="pi pi-times"
+						action="#{userBean.executar}" />
+				</p:contextMenu>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

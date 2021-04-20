@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+body{
+	background: #eee;
+}
+
+.card-form{
+	width: 25em;
+	margin: 10px auto;
+}
+
+.setup-list-item{
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	padding: 1rem;
+}
+
+.setup-list-detail{
+	flex: 1 1 0;
+	-ms-fle: 1 1 0;
+}
