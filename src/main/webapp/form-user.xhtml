@@ -31,16 +31,16 @@
 
 					<p:outputLabel value="Email" for="email" />
 					<p:inputText id="email" value="#{userBean.user.email}" validatorMessage="Email: informe um email válido">
-						<f:validateRegex pattern="/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i"></f:validateRegex>
+						<f:validateLength minimum="6"></f:validateLength>
 						<f:ajax event="blur" render="messages" />
 					</p:inputText>
 					
 					<p:outputLabel value="Password" for="password" />
-					<p:inputText id="password" value="#{userBean.user.password}" required="true"
-					validatorMessage="Password: Deve conter uma letra maiúscula e uma minúscula e ter mais de 6 caracteres">
-						<f:validateRegex pattern="((? = .*[A-z]).{6,})" />
+					<p:password id="password" value="#{userBean.user.password}" required="true" togglemask="true" redisplay="true"
+					validatorMessage="Password: Deve conter 6 caracteres">
+						<f:validateLength minimum="6" />
 						<f:ajax event="blur" render="messages" />
-					</p:inputText>
+					</p:password>
 					
 				</h:panelGrid>
 
