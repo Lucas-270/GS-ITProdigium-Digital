@@ -24,7 +24,7 @@
 					</p:inputText>
 
 					<p:outputLabel value="dateOfBirth" for="dateofbirth" />
-					<p:calendar id="dateofbirth" value="#{userBean.user.dateOfBirth}" required="true"
+					<p:calendar id="dateofbirth" value="#{userBean.user.dateOfBirth}" required="true" showOn="button" mask="true"
 						pattern="dd/MM/yyyy" validatorMessage="dateOfBirth: Informe uma data válida no formato 'dia/mês/ano'">
 						<f:ajax event="blur" render="messages"></f:ajax>
 					</p:calendar>
@@ -37,8 +37,8 @@
 					</p:inputText>
 					
 					<p:outputLabel value="Password" for="password" />
-					<p:password id="password" value="#{userBean.user.password}" required="true" togglemask="true" redisplay="true"
-					validatorMessage="Password: Deve conter 6 caracteres">
+					<p:password id="password" value="#{userBean.user.password}" required="true" togglemask="true" feedback="true"
+					promptLabel="Digite senha forte" weakLabel="Fraco" goodLabel="Bom" validatorMessage="Password: Deve conter 6 caracteres">
 						<f:validateLength minimum="6" />
 						<f:ajax event="blur" render="messages" />
 					</p:password>

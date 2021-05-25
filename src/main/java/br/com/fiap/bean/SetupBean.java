@@ -32,6 +32,10 @@ public class SetupBean {
 	public List<Setup> getSetups(){
 		return new SetupDao().getAll();
 	}
+	
+	public List<Setup> getSetupsPerUser(){
+		return new SetupDao().getAllPerUser();
+	}
 
 	public Setup getSetup() {
 		return setup;
