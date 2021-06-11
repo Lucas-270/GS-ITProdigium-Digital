@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.progamer.mysql</groupId>
-	<artifactId>progamer-mysql</artifactId>
+	<groupId>org.gs.itprodigium</groupId>
+	<artifactId>gs-itprodigium</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<build>
-		<finalName>progamer-mysql</finalName>
+		<finalName>gs-itprodigium</finalName>
 	</build>
 	<properties>
 		<failOnMissingWebXml>false</failOnMissingWebXml>

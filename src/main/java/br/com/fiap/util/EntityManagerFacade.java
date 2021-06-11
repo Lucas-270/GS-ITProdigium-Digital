@@ -8,7 +8,7 @@ public class EntityManagerFacade {
 
 	public static EntityManager get() {
 		EntityManagerFactory factory = 
-				Persistence.createEntityManagerFactory("progamer-persistence-unit");
+				Persistence.createEntityManagerFactory("gs-persistence-unit");
 		return factory.createEntityManager();
 	}
 }

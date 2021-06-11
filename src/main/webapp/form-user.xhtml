@@ -23,12 +23,6 @@
 						<f:ajax event="blur" render="messages" />
 					</p:inputText>
 
-					<p:outputLabel value="dateOfBirth" for="dateofbirth" />
-					<p:calendar id="dateofbirth" value="#{userBean.user.dateOfBirth}" required="true" showOn="button" mask="true"
-						pattern="dd/MM/yyyy" validatorMessage="dateOfBirth: Informe uma data válida no formato 'dia/mês/ano'">
-						<f:ajax event="blur" render="messages"></f:ajax>
-					</p:calendar>
-
 					<p:outputLabel value="Email" for="email" />
 					<p:inputText id="email" value="#{userBean.user.email}" required="true" 
 						validatorMessage="Email: informe um email válido">
@@ -70,9 +64,6 @@
             		
 					<p:column headerText="Name">
 						<h:outputText value="#{user.name}" />
-					</p:column>
-					<p:column headerText="DateOfBirth">
-						<h:outputText value="#{user.dateOfBirth}" />
 					</p:column>
 					<p:column headerText="Email">
 						<h:outputText value="#{user.email}" />

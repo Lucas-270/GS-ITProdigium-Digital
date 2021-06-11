@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+</head>
+
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="content">
+		<p:messages id="messages">
+			<p:autoUpdate />
+		</p:messages>
+		<h:form>
+			<p:card class="card-form">
+				<f:facet name="title">Novo Ponto</f:facet>
+
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nome" for="name" />
+					<p:inputText id="name" value="#{pontoTuristicoBean.ponto.nome}"
+						required="true">
+						<f:ajax event="blur" render="messages" />
+					</p:inputText>
+
+					<p:outputLabel value="Endereco" for="endereco" />
+					<p:inputText id="endereco" placeholder="Rua X, 136 - Barueri, SP"
+						value="#{pontoTuristicoBean.ponto.endereco}" required="true"
+						validatorMessage="Email: informe um email válido">
+						<f:validateLength minimum="6"></f:validateLength>
+						<f:ajax event="blur" render="messages" />
+					</p:inputText>
+
+					<p:outputLabel value="Escala Preço" for="escalaPreco" />
+					<p:selectOneMenu id="escalaPreco" required="true"
+						value="#{pontoTuristicoBean.ponto.escalaPreco}">
+						<f:selectItem itemLabel="Não Informado" itemValue="Não informado" />
+						<f:selectItem itemLabel="R$20 - 50" itemValue="R$20 - 50" />
+						<f:selectItem itemLabel="R$50 - 150" itemValue="R$50 - 150" />
+						<f:selectItem itemLabel="R$150 - 400" itemValue="R$150 - 400" />
+						<f:ajax event="blur" render="messages"/>
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Categoria" for="categoria" />
+					<p:selectOneMenu id="categoria" required="true"
+						value="#{pontoTuristicoBean.ponto.categoria}">
+						<f:selectItem itemLabel="Restaurante" itemValue="Restaurante" />
+						<f:selectItem itemLabel="Mirante" itemValue="Mirante" />
+						<f:selectItem itemLabel="Museu" itemValue="Museu" />
+						<f:selectItem itemLabel="Parque" itemValue="Parque" />
+						<f:selectItem itemLabel="Mercado" itemValue="Mercado" />
+						<f:selectItem itemLabel="Diversão" itemValue="Diversão" />
+						<f:selectItem itemLabel="Praia" itemValue="Praia" />
+						<f:ajax event="blur" render="messages"/>
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Tipo" for="tipo" />
+					<p:inputText id="tipo" value="#{pontoTuristicoBean.ponto.tipo}"
+						required="true" placeholder="Ex: Calmo, Natureza, Reconfortante"
+						validatorMessage="Tipo: Deve ser informado pelo menos uma característica com pelo menos 4 caracteres">
+						<f:validateLength minimum="2" />
+						<f:ajax event="blur" render="messages" />
+					</p:inputText>
+
+					<p:outputLabel value="Companhia" for="companhia" />
+					<p:inputText id="companhia"
+						value="#{pontoTuristicoBean.ponto.companhia}" required="true" placeholder="Ex: Amigos, Família, Casal"
+						validatorMessage="Companhia: Deve ser informado algum individuo com pelo menos 5 caracteres">
+						<f:validateLength minimum="4" />
+						<f:ajax event="blur" render="messages" />
+					</p:inputText>
+
+					<p:outputLabel value="Status" for="status" />
+					<p:selectOneMenu id="status" required="true"
+						value="#{pontoTuristicoBean.ponto.status}">
+						<f:selectItem itemLabel="Aberto" itemValue="Aberto" />
+						<f:selectItem itemLabel="Fechado" itemValue="Fechado" />
+						<f:selectItem itemLabel="Manutenção" itemValue="Manutenção" />
+						<f:ajax event="blur" render="messages"/>
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+
+				<f:facet name="footer">
+					<p:commandButton icon="pi pi-check" value="Save"
+						action="${pontoTuristicoBean.save}">
+						<f:ajax execute="@form" render="form-pontos" />
+					</p:commandButton>
+					<p:commandButton icon="pi pi-times" value="Cancel"
+						styleClass="ui-button-secondary" style="margin-left: .5em" />
+				</f:facet>
+			</p:card>
+		</h:form>
+		<div class="card">
+			<h:form id="form-pontos">
+				<p:dataTable id="pontos" var="ponto"
+					value="#{pontoTuriscoBean.pontos}" rowKey="#{ponto.id}"
+					selectionMode="single">
+
+					<f:facet name="header">
+                		Pontos Turisticos List
+            		</f:facet>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{ponto.nome}" />
+					</p:column>
+					<p:column headerText="Endereco">
+						<h:outputText value="#{ponto.endereco}" />
+					</p:column>
+					<p:column headerText="Categoria">
+						<h:outputText value="#{ponto.categoria}" />
+					</p:column>
+					<p:column headerText="Tipo">
+						<h:outputText value="#{ponto.tipo}" />
+					</p:column>
+					<p:column headerText="Status">
+						<h:outputText value="#{ponto.status}" />
+					</p:column>
+				</p:dataTable>
+
+				<p:contextMenu for="pontos">
+					<p:menuitem value="Delete" update="pontos" icon="pi pi-times"
+						action="#{pontoTuristicoBean.executar}" />
+				</p:contextMenu>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

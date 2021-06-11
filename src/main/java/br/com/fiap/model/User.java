@@ -1,7 +1,5 @@
 package br.com.fiap.model;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +11,6 @@ public class User {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private Date dateOfBirth;
 	private String email;
 	private String password;
 	
@@ -37,14 +34,6 @@ public class User {
 		this.name = name;
 	}
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -63,7 +52,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", dateOfBirth=" + dateOfBirth + ", email=" + email + ", password="
+		return "User [name=" + name + ", email=" + email + ", password="
 				+ password + "]";
 	}
 	

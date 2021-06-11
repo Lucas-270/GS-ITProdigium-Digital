@@ -15,7 +15,7 @@
 		
 		<div class="card product">
 		    <h:form id="form">
-		        <p:dataView var="setup" value="#{setupBean.setups}" rows="12" paginator="true"
+		        <p:dataView var="ponto" value="#{pontoTuristicoBean.pontos}" rows="12" paginator="true"
 		                    rowsPerPageTemplate="5,10"
 		                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 		                    gridIcon="pi pi-th-large" listIcon="pi pi-bars">
@@ -49,16 +49,16 @@
 		            </p:dataViewGridItem>
 		
 		            <p:dataViewListItem>
-		                <div class="setup-list-item">
+		                <div class="ponto-list-item">
 		                    <p:graphicImage name="demo/images/product/#{product.image}"/>
-		                    <div class="setup-list-detail">
-		                        <div class="setup-name">#{setup.name}</div>
-		                        <div class="setup-description">#{setup.description}</div>
+		                    <div class="ponto-list-detail">
+		                        <div class="ponto-name">#{ponto.nome}</div>
+		                        <div class="ponto-tipo">#{ponto.tipo}</div>
 		                        <p:rating value="0"/>
 		                        
 		                    </div>
-		                    <div class="setup-list-action">
-		                        <h:outputText value="#{setup.price}" styleClass="setup-price">
+		                    <div class="ponto-list-action">
+		                        <h:outputText value="#{ponto.escalaPreco}" styleClass="setup-price">
 		                            <f:convertNumber currencySymbol="R$" type="currency"/>
 		                        </h:outputText>
 		                        <p:commandButton type="button"

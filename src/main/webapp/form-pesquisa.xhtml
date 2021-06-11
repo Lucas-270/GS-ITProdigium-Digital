@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="content">
+		<p:messages id="messages"><p:autoUpdate /></p:messages>
+		<h:form>
+			<p:card class="card-form">
+				<f:facet name="title">Nova Pesquisa</f:facet>
+
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nome" for="name" />
+					<p:inputText id="name" value="#{pesquisaSatisfacaoBean.pesquisa.nomePonto}"
+						required="true" >
+						<f:ajax event="blur" render="messages"></f:ajax>
+					</p:inputText>
+
+					<p:outputLabel value="Comentario" for="comentario" />
+					<p:inputTextarea id="comentario" placeholder="O que você achou do local?"
+						value="#{pesquisaSatisfacaoBean.pesquisa.comentario}"
+						validatorMessage="Description: Tamanho do campo deve estar entre 50 e 255">
+						<f:validateLength maximum="255" minimum="50" />
+						<f:ajax event="blur" render="messages"></f:ajax>
+					</p:inputTextarea>
+
+					<p:outputLabel value="Nota" for="nota" />
+					<p:inputText id="nota" value="#{pesquisaSatisfacaoBean.pesquisa.notaAvalicao}"
+						placeholder="De 0 a 5" >
+						<f:validateDoubleRange minimum="0" maximum="5" />
+						<f:ajax event="blur" render="messages"></f:ajax>
+					</p:inputText>
+					
+					<p:outputLabel value="Tipo" for="tipo" />
+					<p:inputText id="tipo" value="#{pesquisaSatisfacaoBean.pesquisa.tipo}"
+						required="true" placeholder="Ex: Calmo, Aprendizado">
+						<f:ajax event="blur" render="messages"></f:ajax>
+					</p:inputText>
+					
+					<p:outputLabel value="Companhia" for="companhia" />
+					<p:inputText id="companhia" value="#{pesquisaSatisfacaoBean.pesquisa.companhia}"
+						required="true" placeholder="Ex: Amigos, Familia, Casal">
+						<f:ajax event="blur" render="messages"></f:ajax>
+					</p:inputText>
+
+				</h:panelGrid>
+
+				<f:facet name="footer">
+					<p:commandButton icon="pi pi-check" value="Save"
+						action="${pesquisaSatisfacaoBean.save}" >
+						<f:ajax execute="@form" render="form-pesquisas"/>
+					</p:commandButton>
+					<p:commandButton icon="pi pi-times" value="Cancel"
+						styleClass="ui-button-secondary" style="margin-left: .5em" />
+				</f:facet>
+			</p:card>
+		</h:form>
+
+		<div class="card">
+			<h:form id="form-pesquisas">
+				<p:dataTable 
+					id="pesquisas" 
+					var="pesquisa"
+					value="#{pesquisaSatisfacaoBean.pesquisas}" 
+					rowKey="#{pesquisa.id}"
+					selectionMode="single">
+
+					<f:facet name="header">
+                		Pesquisa Satisfação List
+            		</f:facet>
+            		
+					<p:column headerText="Nome">
+						<h:outputText value="#{pesquisa.nomePonto}" />
+					</p:column>
+					<p:column headerText="Avaliacao">
+						<h:outputText value="#{pesquisa.notaAvalicao}" />
+					</p:column>
+					<p:column headerText="Tipo">
+						<h:outputText value="#{pesquisa.tipo}" />
+					</p:column>
+					<p:column headerText="Companhia">
+						<h:outputText value="#{pesquisa.companhia}" />
+					</p:column>
+					<p:column headerText="Comentario">
+						<h:outputText value="#{pesquisa.comentario}" />
+					</p:column>
+				</p:dataTable>
+
+				<p:contextMenu for="pesquisas">
+					<p:menuitem value="Delete" update="pesquisas" icon="pi pi-times"
+						action="#{pesquisaSatisfacaoBean.executar}" />
+				</p:contextMenu>
+			</h:form>
+		</div>
+		
+	</ui:define>
+</ui:composition>
+</html>

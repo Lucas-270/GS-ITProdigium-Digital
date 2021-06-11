@@ -13,19 +13,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.fiap.dao.SetupDao;
-import br.com.fiap.model.Setup;
+import br.com.fiap.dao.PontoTuristicoDao;
+import br.com.fiap.model.PontoTuristico;
 
-@Path("/setups")
+@Path("/pontos")
 @Produces(MediaType.APPLICATION_JSON)
-public class SetupEndpoint {
+public class PontoTuristicoEndpoint {
 
-	private SetupDao dao = new SetupDao();
+	private PontoTuristicoDao dao = new PontoTuristicoDao();
 
 	@GET
 	public Response index() {
 		try {
-			List<Setup> list = dao.getAll();
+			List<PontoTuristico> list = dao.getAll();
 			return Response.status(Response.Status.OK).entity(list).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -34,13 +34,13 @@ public class SetupEndpoint {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response create(Setup setup) {
-		if (setup == null) {
+	public Response create(PontoTuristico ponto) {
+		if (ponto == null) {
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		try {
-			dao.save(setup);
-			return Response.status(Response.Status.CREATED).entity(setup).build();
+			dao.saveApi(ponto);
+			return Response.status(Response.Status.CREATED).entity(ponto).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 		}
@@ -49,22 +49,22 @@ public class SetupEndpoint {
 	@GET
 	@Path("{id}")
 	public Response show(@PathParam("id") Long id) {
-		Setup setup = dao.findById(id);
-		if (setup == null) {
+		PontoTuristico ponto = dao.findById(id);
+		if (ponto == null) {
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}
-		return Response.status(Response.Status.OK).entity(setup).build();
+		return Response.status(Response.Status.OK).entity(ponto).build();
 	}
 
 	@PUT
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(@PathParam("id") Long id, Setup setup) {
+	public Response update(@PathParam("id") Long id, PontoTuristico ponto) {
 		if (id == null) {
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 
-		if (setup == null) {
+		if (ponto == null) {
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 
@@ -72,12 +72,12 @@ public class SetupEndpoint {
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}
 
-		setup.setId(id);
+		ponto.setId(id);
 		try {
-			dao.update(setup);
-			return Response.status(Response.Status.OK).entity(setup).build();
+			dao.update(ponto);
+			return Response.status(Response.Status.OK).entity(ponto).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(setup).build();
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(ponto).build();
 		}
 	}
 
@@ -92,9 +92,9 @@ public class SetupEndpoint {
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}
 
-		Setup setup = dao.findById(id);
+		PontoTuristico ponto = dao.findById(id);
 		try {
-			dao.delete(setup);
+			dao.delete(ponto);
 			return Response.status(Response.Status.OK).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
